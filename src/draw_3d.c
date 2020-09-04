@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/25 18:53:51 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/04 20:13:27 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,29 @@ void		draw_walls(t_game *game, int x, t_isec *isec)
 void		*draw_block_3d(void *g)
 {
 	t_isec	isec;
-	t_game	*game;
 	int		x;
 	int		x_index;
 	int		max_x;
 	t_thread	*t;
 
 	t = (t_thread*)g;
-	game = t->game;
 	x = -H_W + t->thread * S_W / THREADS - 1;
 	max_x = -H_W + (t->thread + 1) * S_W / THREADS;
-	while (++x < max_x)
-	{
-		engine(game, &isec, x);
+	//while (++x < max_x)
+	//{
+		++x;
+		//++x;
+		// ++x;
+		// ++x;
+		
+		engine(t->game, &isec, x);
 		set_col_by_num(&(isec.col), isec.number);
 		x_index =  (H_W - x);
-		draw_roof(game, -H_H, x_index, -isec.height);
-		draw_floor(game, isec.height, x_index, H_H - 1);
-		draw_walls(game, x_index, &(isec));
-	}
+		draw_roof(t->game, -H_H, x_index, -isec.height);
+		draw_floor(t->game, isec.height, x_index, H_H - 1);
+		draw_walls(t->game, x_index, &(isec));
+		//break;//ft_exit("ok");
+	//}
 	return (0);
 }
 
@@ -134,31 +138,4 @@ void		draw_game(t_game *game)
 	draw_sprites(game);
 	//draw_gui(game);
 }
-/*
-void		draw_game2(t_game *game)
-{
-	t_game			data[THREADS];
-	pthread_t		threads[THREADS];
-	pthread_attr_t	attr;
-	int				rc;
-	void			*status;
 
-	pthread_attr_init(&attr);
-	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-	game->thread= -1;
-	while (++(game->thread) < THREADS)
-	{
-		ft_memcpy((void*)&data[game->thread], (void *)game, sizeof(t_game));
-		rc = pthread_create(&threads[game->thread],
-			NULL, draw_block_3d, (void *)(&data[game->thread]));
-	}
-	pthread_attr_destroy(&attr);
-	game->thread = -1;
-	while (++(game->thread) < THREADS)
-		rc = pthread_join(threads[game->thread], &status);
-	if (game->draw_map)
-		draw_map(game);
-	draw_sprites(game);
-	//draw_gui(game);
-}
-//*/

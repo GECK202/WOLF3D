@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/25 23:26:15 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/04 20:13:49 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define H_W 700
 # define H_H 350
 # define RATIO 1.78f
-# define THREADS 16
+# define THREADS 1
+# define PI2 6.283185307179586
 
 # define OK 1
 # define ERROR 0
@@ -50,14 +51,14 @@
 
 typedef struct		s_vec2
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 }					t_vec2;
 
 typedef struct		s_isec
 {
 	SDL_Color		col;
-	float			dist;
+	double			dist;
 	int				height;
 	int				number;
 	int				colum;
@@ -79,10 +80,10 @@ typedef struct		s_game_obj
 {
 	t_vec2			pos;
 	t_vec2			dir;
-	float			rot;
-	float			speed;
-	int				rot_speed;
-	float			border;
+	double			rot;
+	double			speed;
+	double			rot_speed;
+	double			border;
 	int				status;
 }					t_game_obj;
 
@@ -112,14 +113,14 @@ typedef struct		s_enm
 typedef struct		s_ach
 {
 	t_vec2			pos;
-	float			border;
+	double			border;
 	t_sprt			*sprt;
 }					t_ach;
 
 typedef struct		s_bar
 {
 	t_vec2			pos;
-	float			border;
+	double			border;
 	t_sprt			*sprt;
 }					t_bar;
 
@@ -155,8 +156,8 @@ typedef struct		s_level
 
 typedef struct		s_sector
 {
-	float			fov;
-	float			ang_step;
+	int				fov;
+	double			ang_step;
 	t_vec2			l_ang;
 	t_vec2			r_ang;
 }					t_sector;
@@ -165,11 +166,12 @@ typedef struct		s_player
 {
 	t_game_obj		obj;
 	t_sector		sec;
+	int				ray_depth;
 }					t_player;
 
 typedef struct		s_message
 {
-	char *			text;
+	char			*text;
 	SDL_Color		color;
 	int				size;
 }					t_message;
@@ -187,6 +189,46 @@ typedef struct		s_cursor
 	SDL_Point		pos;
 	t_entity		*en;
 }					t_cursor;
+
+typedef struct	s_drawer
+{
+	int			cursor_x;
+	int			cursor_y;
+	double		ray_angle;
+	double		ray_sin;
+	double		ray_cos;
+	
+	double		raylen_tmp;
+	double		ray_len;
+	
+	double		barrier_x_f;
+	double		barrier_y_f;
+	double		barrier_x_f_tmp;
+	double		barrier_y_f_tmp;
+	int			barrier_x_d;
+	int			barrier_y_d;
+	
+	// for export to project
+	double		ray_tan[2];
+	double		raylen[2];
+	double		barrier_f[2][2];
+	int			barrier_d[2];
+	double		texel[2];
+	int			mapid;
+	int			wall_tile;
+
+	double		texel_x;
+	double		texel_y;
+
+	int			tex_u;
+	char		wall_part; //need rename
+	char		wall_color;
+	double		ray_alpha;
+	int			wall_up;
+	int			wall_down;
+	int			wall_len;
+	
+}				t_drawer;
 
 typedef struct		s_editor
 {
@@ -235,6 +277,7 @@ typedef struct		s_game
 //	int				thread;
 	t_level			level;
 	t_player		player;
+	t_drawer		drawer;
 }					t_game;
 
 typedef struct		s_thread
@@ -265,14 +308,14 @@ void		sdl_cycle(t_game *game);
 void		draw_game(t_game *game);
 
 //game object
-void		move_forward(t_game_obj *obj, t_map *map, float koeff);
-void		move_back(t_game_obj *obj, t_map *map, float koeff);
-void		move_left(t_game_obj *obj, t_map *map, float koeff);
-void		move_right(t_game_obj *obj, t_map *map, float koeff);
-void		turn_left(t_game_obj *obj, float koeff);
-void		turn_right(t_game_obj *obj, float koeff);
-void		init_object(t_game_obj *obj, t_vec2 pos, int rot, float speed,
-		int rot_speed);
+void		move_forward(t_game_obj *obj, t_map *map, double koeff);
+void		move_back(t_game_obj *obj, t_map *map, double koeff);
+void		move_left(t_game_obj *obj, t_map *map, double koeff);
+void		move_right(t_game_obj *obj, t_map *map, double koeff);
+void		turn_left(t_game_obj *obj, double koeff);
+void		turn_right(t_game_obj *obj, double koeff);
+void		init_object(t_game_obj *obj, t_vec2 pos, double rot, double speed,
+		double rot_speed);
 		
 //map
 void		load_map(t_level *level, t_player *pl);
@@ -328,5 +371,24 @@ void		draw_editor_side_wall(t_game *game, t_editor *ed, int side);
 void		draw_sprites(t_game *game);
 void		def_spriteparam(t_game *game, t_sprt *sprite);
 void		draw_vertline(t_game *game, t_sprt *sprite);
+
+//new engine
+/*
+** door_sprite.c
+*/
+void	def_raylen(t_map *map, t_player *player, t_drawer *drawer);
+char	check_barrier(t_map *map, t_player *player, t_drawer *drawer);
+double	calc_raylen(t_player *player, t_drawer *drawer, char index);
+void	def_barrierparam(t_player *player, t_drawer *drawer, char n_quad);
+void	def_walltile(t_map *map, t_drawer *drawer);
+void	def_walltile_u(t_drawer *drawer);
+
+/*
+** calc_quads.c
+*/
+void	calc_firstquad(t_map *map, t_player *player, t_drawer *drawer);
+void	calc_secondquad(t_map *map, t_player *player, t_drawer *drawer);
+void	calc_thirdquad(t_map *map, t_player *player, t_drawer *drawer);
+void	calc_fourthquad(t_map *map, t_player *player, t_drawer *drawer);
 
 #endif

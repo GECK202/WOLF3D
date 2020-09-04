@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/25 22:45:18 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/04 20:09:39 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
+/*
 void	set_col_num(t_vec2 *isc_pos, t_isec *isec, t_game *game, SDL_Point index)
 {
-	//float		colum;
 	t_vec2		delta;
-	//t_vec2		box;
-	//t_col_num	res;
-	//float		tmp;
 	int		number;
 	int		number2;
 	
@@ -56,42 +53,6 @@ void	set_col_num(t_vec2 *isc_pos, t_isec *isec, t_game *game, SDL_Point index)
 		if (number2 == 1)
 			isec->colum = 63 - isec->colum;
 	}
-	//return (res);
-	/*
-	res.col = 0;
-	res.num = 0;
-	box.x = floor(isc_pos.x);
-	box.y = floor(isc_pos.y);
-
-	if (pos->x >= box.x && pos->x <= box.x + 1.0)
-	{
-		if (pos->y < box.y)
-		{
-			tmp = isc_pos->x - ((isc_pos->x - pos->x) * 
-				(box.y - pos->y) / (isc_pos->y - pos->y));
-			res.col = ((int)(tmp = (int)tmp) * 64);
-			res.num = 0;
-		}
-		
-			
-	}
-
-	delta.x = abs(pos->x - isc_pos->x);
-	delta.y = abs(pos->y - isc_pos->y);
-	
-	if ()
-	
-	if (delta.x <= delta.y)
-	{
-		if ()
-		colum = (isc_pos->x - (int)isc_pos->x) * 64;
-	}
-	else
-	{
-		colum = (isc_pos->y - (int)isc_pos->y) * 64;
-	}
-	return ((int)colum);
-	*/
 }
 
 void	engine(t_game *game, t_isec *isec, int x)
@@ -127,4 +88,39 @@ void	engine(t_game *game, t_isec *isec, int x)
 			}
 		}
 	}
+}
+//*/
+void	def_wallparams(t_player *player, t_drawer *drawer)
+{
+	drawer->ray_alpha = (player->sec.fov * (S_W / 2 - drawer->cursor_x)) / (double)S_W;
+	drawer->wall_up = (S_H / 2) - (S_H / (drawer->raylen[0] * cos(drawer->ray_alpha)));
+	// drawer->wall_up = (S_H / 2) - (S_H / (drawer->ray_len));
+	drawer->wall_down = S_H - drawer->wall_up;
+	drawer->wall_len = drawer->wall_down - drawer->wall_up;
+}
+
+
+
+void	engine(t_game *game, t_isec *isec, int x)
+{
+	t_drawer	*drawer;
+	t_player	*player;
+	t_map		*map;
+
+	drawer = &(game->drawer);
+	player = &(game->player);
+	map = &(game->level.map);
+	drawer->cursor_x = x + H_W;
+	def_raylen(map, player, drawer);
+	def_walltile(map, drawer);
+	def_walltile_u(drawer);
+	def_wallparams(player, drawer);
+
+	
+	
+	isec->dist = drawer->raylen[0];
+	isec->height = drawer->wall_len;
+	isec->number = drawer->wall_tile;
+	isec->colum = drawer->tex_u;
+	
 }

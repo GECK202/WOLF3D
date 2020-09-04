@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/25 22:45:22 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/04 19:30:52 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	init_player(t_game *game)
 
 	pos.x = 4.5f;
 	pos.y = 3.5f;
-	init_object(&(game->player.obj),  pos, 0, 10, 120);
+	game->player.ray_depth = 91;
+	init_object(&(game->player.obj),  pos, 0, 10, 2);
 	game->player.sec.fov = 40;
 	game->player.sec.ang_step = game->player.sec.fov / S_W;
 	rad = (game->player.obj.rot + (game->player.sec.fov / 2.0f)) * M_PI / 180;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/08 22:16:05 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/04 17:55:43 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,10 +156,10 @@ int		read_map(t_editor *ed, char *data, int cell)
 			return (0);
 	p.y = cell / 64;
 	p.x = cell - p.y * 64;
-	if (ed->type_map[p.y][p.x] = cmp[0])
+	if ((ed->type_map[p.y][p.x] = cmp[0]))
 	{
 		ed->map.elem[p.y][p.x].number = (cmp[1] << 8) | (cmp[2] << 4) | cmp[3];
-		ed->map.elem[p.y][p.x].modify = ed->type_map[p.y][p.x] = cmp[4];
+		ed->map.elem[p.y][p.x].modify = cmp[4];
 		i = 2;
 		while ((i += 3) < 15)
 			ed->map.elem[p.y][p.x].side[0] = (cmp[i] << 8) | (cmp[i + 1] << 4) | cmp[ i + 2];
@@ -186,13 +186,8 @@ void	load_ed_map(t_editor *ed)
 
 	if ((fd = open(file, 0x0000)) < 0)
 		ft_exit("Hey man! It is are not a map!!!");
-	//if (((n = read(fd, buf, 18)) != 18) || buf[17] != '\n' || !read_base_color(&ed->map, buf))
-	//{
-	//	close(fd);
-	//	ft_exit("Not valid map!!!");
-	//}
 	cell = -2;
-	while (n = read(fd, buf, 18))
+	while ((n = read(fd, buf, 18)))
 	{
 		++cell;
 		if (cell == 4096 || n != 18 || buf[17] != '\n' || !read_map(ed, buf, cell))

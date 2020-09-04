@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 17:12:18 by vkaron            #+#    #+#              #
-#    Updated: 2020/08/25 23:27:37 by vkaron           ###   ########.fr        #
+#    Updated: 2020/09/04 18:12:04 by jthuy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ FILES =		act_sdl \
 			editor_help \
 			editor_select \
 			sprite \
+			calc_quads \
+			draw_room \
 			
 
 S_DIR =		src

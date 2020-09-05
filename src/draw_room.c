@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_room.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 16:10:28 by jthuy             #+#    #+#             */
-/*   Updated: 2020/09/04 19:53:16 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/05 20:25:21 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 // VERSION 3 tan KVADRANT
 void	def_raylen(t_map *map, t_player *player, t_drawer *drawer)
 {
-	drawer->ray_angle = ((drawer->cursor_x / (double)S_W) * player->sec.fov)
-		+ (player->obj.rot - player->sec.fov / (double)2);
+	drawer->ray_angle = (game->player.obj.rot + game->player.sec.ang_step * x);//((drawer->cursor_x / (double)S_W) * player->sec.fov)
+		//+ (player->obj.rot - player->sec.fov / (double)2);
 	drawer->ray_tan[0] = tan(drawer->ray_angle);
 	drawer->ray_tan[1] = tan(drawer->ray_angle - M_PI_2);
 	if (drawer->ray_angle >= 2 * M_PI)

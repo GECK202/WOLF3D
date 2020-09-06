@@ -14,31 +14,19 @@
 
 void		draw_roof(t_game *game, int y, int x, int max_y)
 {
-	int g;
-
-	g = 10;
 	y = y - 1;
 	while (++y <= max_y)
 	{
 		game->data[(H_H + y) * S_W + x] = game->level.map.roof;
-		//((clamp_col((game->level.map.roof & 0xFF0000 >> 16) - (H_H + y) * g / H_H)) << 16) + 
-		//((clamp_col((game->level.map.roof & 0xFF00 >> 8) - (H_H + y) * g / H_H)) << 8) + 
-		//clamp_col((game->level.map.roof & 0xFF) - (H_H + y) * g / H_H);
 	}
 }
 
 void		draw_floor(t_game *game, int y, int x, int max_y)
 {
-	int g;
-
-	g = 10;
 	y = y - 1;
 	while (++y <= max_y)
 	{
 		game->data[(H_H + y) * S_W + x] = game->level.map.floor;
-		//((clamp_col((game->level.map.floor & 0xFF0000 >> 16) - (H_H - y) * g / H_H)) << 16) + 
-		//((clamp_col((game->level.map.floor & 0xFF00 >> 8) - (H_H - y) * g / H_H)) << 8) + 
-		//clamp_col((game->level.map.floor & 0xFF) - (H_H - y) * g / H_H);
 	}
 }
 
@@ -69,15 +57,12 @@ void		draw_walls(t_game *game, int x, t_isec *isec)
 			index[0] = (S_W * S_H) - 1;
 		if (index[1] > (game->athlas->w * game->athlas->h) - 1)
 			index[1] = (game->athlas->w * game->athlas->h) - 1;
-		//if (game->data_img[index[1]] == 0x980088)
-		//	return ;
 		set_color(&col, 
 			clamp_col(((game->data_img[index[1]] & 0xff)) - k), 
 			clamp_col(((game->data_img[index[1]] & 0xff00)>>8) - k),
 			clamp_col(((game->data_img[index[1]] & 0xff0000)>>16) - k));
 		game->data[index[0]] = (col.b << 16) | (col.g << 8) | col.r;
 		game->z_buffer[index[0]] = isec->dist;
-		//game->data_img[index[1]];
 	}
 }
 
@@ -94,18 +79,12 @@ void		*draw_block_3d(void *g)
 	max_x = -H_W + (t->thread + 1) * S_W / THREADS;
 	while (++x < max_x)
 	{
-		//++x;
-		//++x;
-		// ++x;
-		// ++x;
-		
 		engine(t->game, &isec, x);
 		set_col_by_num(&(isec.col), isec.number);
 		x_index =  (H_W - x);
 		draw_roof(t->game, -H_H, x_index, -isec.height);
 		draw_floor(t->game, isec.height, x_index, H_H - 1);
 		draw_walls(t->game, x_index, &(isec));
-		//break;//ft_exit("ok");
 	}
 	return (0);
 }
@@ -123,7 +102,6 @@ void		draw_game(t_game *game)
 	thread= -1;
 	while (++thread < THREADS)
 	{
-		//ft_memcpy((void*)&data[game->thread], (void *)game, sizeof(t_game));
 		data[thread].game = game;
 		data[thread].thread = thread;
 		pthread_create(&threads[thread],

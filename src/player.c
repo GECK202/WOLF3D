@@ -19,6 +19,7 @@ void	init_player(t_game *game)
 	pos.x = 4.5f;
 	pos.y = 3.5f;
 	init_object(&(game->player.obj),  pos, 0, 10, 2);
-	game->player.sec.fov = 40 * M_PI / 180;
+	game->player.sec.fov = 90 * M_PI / 180;
 	game->player.sec.ang_step = game->player.sec.fov / S_W;
+	game->player.ray_depth = 91;
 }

@@ -107,28 +107,35 @@ typedef struct		s_sprt
 typedef struct		s_enm
 {
 	t_game_obj		obj;
-	t_sprt			*sprt;
+	t_sprt			sprt;
+	int				status;
 }					t_enm;
+
+typedef struct		s_dr
+{
+	t_game_obj		obj;
+	t_sprt			sprt;
+	int				status;
+}					t_dr;
 
 typedef struct		s_ach
 {
 	t_vec2			pos;
-	double			border;
-	t_sprt			*sprt;
+	float			border;
+	t_sprt			sprt;
 }					t_ach;
 
 typedef struct		s_bar
 {
-	t_vec2			pos;
-	double			border;
-	t_sprt			*sprt;
+	t_sprt			sprt;
+	int				status;
 }					t_bar;
 
-typedef struct		s_antrg
+typedef struct		s_ant
 {
 	t_vec2			pos;
-	t_sprt			*sprt;
-}					t_acntrg;
+	t_sprt			sprt;
+}					t_ant;
 
 typedef	struct		s_map_elem
 {
@@ -136,7 +143,6 @@ typedef	struct		s_map_elem
 	int				lock;
 	int				number;
 	int				modify;
-	//t_type			type;
 }					t_map_elem;
 
 typedef struct		s_map
@@ -145,6 +151,9 @@ typedef struct		s_map
 	Uint32			roof;
 	t_map_elem		elem[64][64];
 	t_enm			enm[128];
+	t_ach			ach[64];
+	t_bar			bar[64];
+	t_ant			ant[64];
 	t_game_obj		player;
 }					t_map;
 

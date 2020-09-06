@@ -93,10 +93,7 @@ void	engine(t_game *game, t_isec *isec, int x)
 void	def_wallparams(t_player *player, t_drawer *drawer)
 {
 	drawer->ray_alpha = (player->sec.fov * (S_W / 2 - drawer->cursor_x)) / (double)S_W;
-	drawer->wall_up = (S_H / 2) - (S_H / (drawer->raylen[0] * cos(drawer->ray_alpha)));
-	// drawer->wall_up = (S_H / 2) - (S_H / (drawer->ray_len));
-	drawer->wall_down = S_H - drawer->wall_up;
-	drawer->wall_len = drawer->wall_down - drawer->wall_up;
+	drawer->wall_len = (S_W / (drawer->raylen[0] * cos(drawer->ray_alpha)));
 }
 
 
@@ -119,8 +116,7 @@ void	engine(t_game *game, t_isec *isec, int x)
 	
 	
 	isec->dist = drawer->raylen[0];
-	isec->height = drawer->wall_len;
+	isec->height = drawer->wall_len / 2;
 	isec->number = drawer->wall_tile;
-	isec->colum = drawer->tex_u;
-	
+	isec->colum = drawer->tex_u;	
 }

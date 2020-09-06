@@ -31,8 +31,8 @@
 // VERSION 3 tan KVADRANT
 void	def_raylen(t_map *map, t_player *player, t_drawer *drawer)
 {
-	drawer->ray_angle = (game->player.obj.rot + game->player.sec.ang_step * x);//((drawer->cursor_x / (double)S_W) * player->sec.fov)
-		//+ (player->obj.rot - player->sec.fov / (double)2);
+	drawer->ray_angle = ((drawer->cursor_x / (double)S_W) * player->sec.fov)
+		+ (player->obj.rot - player->sec.fov / 2.0);
 	drawer->ray_tan[0] = tan(drawer->ray_angle);
 	drawer->ray_tan[1] = tan(drawer->ray_angle - M_PI_2);
 	if (drawer->ray_angle >= 2 * M_PI)
@@ -76,8 +76,8 @@ char	check_barrier(t_map *map, t_player *player, t_drawer *drawer)
 	if (drawer->barrier_d[0] < 0 || drawer->barrier_d[0] >= 64 ||
 		drawer->barrier_d[1] < 0 || drawer->barrier_d[1] >= 64)
 		return (1);
-	drawer->mapid = drawer->barrier_d[0] + 64 * drawer->barrier_d[1];
-	if (map->elem[drawer->barrier_d[1]][drawer->barrier_d[0]].lock)//field[drawer->mapid] == '1' ||
+	//drawer->mapid = drawer->barrier_d[0] + 64 * drawer->barrier_d[1];
+	if (map->elem[drawer->barrier_d[1]][drawer->barrier_d[0]].number >=0)//field[drawer->mapid] == '1' ||
 		//map->field[drawer->mapid] == '2' ||
 		//map->field[drawer->mapid] == '3')
 		return (1);
@@ -114,7 +114,7 @@ void	def_walltile(t_map *map, t_drawer *drawer)
 {
 	drawer->barrier_d[0] = drawer->barrier_f[0][0];
 	drawer->barrier_d[1] = drawer->barrier_f[0][1];
-	drawer->mapid = drawer->barrier_d[0] + 64 * drawer->barrier_d[1];
+	//drawer->mapid = drawer->barrier_d[0] + 64 * drawer->barrier_d[1];
 	//if (map->field[drawer->mapid] == '1')
 	//{
 	//	drawer->wall_tile = '1';

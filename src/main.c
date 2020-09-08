@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 09:27:47 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:28:57 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int			main(int ac, char *av[])
 	double		z_buffer[S_W * S_H];
 
 	status = 1;
+	if (S_W < 640 || S_H < 480)
+		ft_exit("Bad resolution!!!");
 	if (ac == 2) {
 		cheat = ft_strcmp(av[1], "cheat");
 		if (!ft_strcmp(av[1], "editor"))
 			status = 2;
 	}
-	game.z_buffer = &z_buffer;
+	game.z_buffer = z_buffer;
 	init_player(&game);
 	load_map(&game.level, &game.player);
 	if (!init_sdl(&game))

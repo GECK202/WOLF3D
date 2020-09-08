@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 11:51:07 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:12:25 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,5 @@ void	map_editor(t_game *game)
 		}
 		SDL_Delay(5);
 	}
-	game->status = 3;
+	game->status = 1;
 }

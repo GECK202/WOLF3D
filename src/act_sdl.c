@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/17 19:41:09 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:28:31 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	check_keyboard(t_game *game, float d_time)
 void	redraw(t_game *game, int *fps)
 {
 	unsigned int	cur_time;
+	
 
 	cur_time = SDL_GetTicks();
+	
 	if (cur_time > game->last_time + game->f_time)
 	{
 		for (int i = 0; i < S_W * S_H; i++)
@@ -96,7 +98,7 @@ void	sdl_cycle(t_game *game)
 	int			lastTime;
 	int			curTime;
 	float		d_time;
-
+	
 	quit = 0;
 	first = 1;
 	fps = 0;

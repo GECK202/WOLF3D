@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 14:09:09 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:32:55 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	engine(t_game *game, t_isec *isec, int x)
 		game->level.map.elem[dr->barrier_d[1]][dr->barrier_d[0]].side[side];
 	isec->colum = dr->tex_u;
 	if (side < 2)
-		isec->colum = 64 - dr->tex_u;
+		isec->colum = 63 - dr->tex_u;
 }

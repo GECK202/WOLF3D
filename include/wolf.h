@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 15:04:05 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 16:01:07 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,8 +272,10 @@ typedef struct		s_game
 	SDL_Window		*win;
 	SDL_Surface		*surf;
 	SDL_Surface		*athlas;
+	SDL_Surface		*menu;
 	int				*data;
 	int				*data_img;
+	int				*data_menu;
 	double			*z_buffer;//[S_W * S_H];
 	int				status;
 	int				draw_map;
@@ -286,6 +288,7 @@ typedef struct		s_game
 	t_level			level;
 	t_player		player;
 	t_drawer		drawer;
+	
 }					t_game;
 
 typedef struct		s_thread
@@ -399,5 +402,9 @@ void	calc_firstquad(t_map *map, t_player *player, t_drawer *drawer);
 void	calc_secondquad(t_map *map, t_player *player, t_drawer *drawer);
 void	calc_thirdquad(t_map *map, t_player *player, t_drawer *drawer);
 void	calc_fourthquad(t_map *map, t_player *player, t_drawer *drawer);
+
+//main menu
+void	main_menu(t_game *game);
+void	sld_events_menu(t_game *game, SDL_Event e, SDL_Point *flags);
 
 #endif

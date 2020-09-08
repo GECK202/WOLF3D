@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 15:28:57 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:53:49 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		main_selector(t_game *game)
 		else if (game->status == 2)
 			map_editor(game);
 		else if (game->status == 3)
-			game->status = 0;
+			main_menu(game);
 	}
 }
 
@@ -34,7 +34,7 @@ int			main(int ac, char *av[])
 	int			status;
 	double		z_buffer[S_W * S_H];
 
-	status = 1;
+	status = 3;
 	if (S_W < 640 || S_H < 480)
 		ft_exit("Bad resolution!!!");
 	if (ac == 2) {

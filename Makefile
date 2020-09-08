@@ -6,7 +6,7 @@
 #    By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 17:12:18 by vkaron            #+#    #+#              #
-#    Updated: 2020/09/08 12:17:02 by vkaron           ###   ########.fr        #
+#    Updated: 2020/09/08 15:53:29 by vkaron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ FILES =		act_sdl \
 			sprite \
 			calc_quads \
 			draw_room \
+			menu \
+			menu_events \
 			
 
 S_DIR =		src

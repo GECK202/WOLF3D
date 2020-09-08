@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/07/27 14:33:06 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/08 16:02:55 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		reformat(t_game *game, SDL_PixelFormat *fmt)
+void		reformat(int *data_img, SDL_Surface *image, SDL_PixelFormat *fmt)
 {
 	int	i;
 	int	j;
@@ -20,24 +20,22 @@ void		reformat(t_game *game, SDL_PixelFormat *fmt)
 	SDL_Color	col;
 	
 	j = -1;
-	while (++j < game->athlas->h)
+	while (++j < image->h)
 	{
 		i = -1;
-		while (++i < game->athlas->w)
+		while (++i < image->w)
 		{
-			index = j * game->athlas->w + i;
-			col.r = (game->data_img[index] & 0xFF0000)>>16;
-			col.g = (game->data_img[index] & 0xFF00)>>8;
-			col.b = (game->data_img[index] & 0xFF);
-			game->data_img[index] = (col.b << fmt->Bshift) | (col.g << fmt->Gshift) | (col.r << fmt->Rshift);
+			index = j * image->w + i;
+			col.r = (data_img[index] & 0xFF0000)>>16;
+			col.g = (data_img[index] & 0xFF00)>>8;
+			col.b = (data_img[index] & 0xFF);
+			data_img[index] = (col.b << fmt->Bshift) | (col.g << fmt->Gshift) | (col.r << fmt->Rshift);
 		}
 	}
 }
 
 int		init_sdl(t_game *game)
 {
-	SDL_PixelFormat *fmt;
-
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) //|SDL_INIT_AUDIO
 		return (ERROR);
 	
@@ -57,12 +55,14 @@ int		init_sdl(t_game *game)
 	game->f_time = 1000 / game->fps;
 	game->last_time = SDL_GetTicks();
 	game->athlas = IMG_Load("res/athlas2.png");
+	game->menu = IMG_Load("res/main_screen.png");
 	//printf("alias");
-	if (!game->athlas)
+	if (!game->athlas || !game->menu)
 		return (ERROR);
 	game->data_img = (int *)game->athlas->pixels;
-	fmt = game->athlas->format;
-	reformat(game, fmt);
+	game->data_menu = (int *)game->menu->pixels;
+	reformat(game->data_img, game->athlas, game->athlas->format);
+	reformat(game->data_menu, game->menu, game->menu->format);
 	
 
 //printf("Pixel Color -> R: %d,  G: %d,  B: %d,  A: %d\n", fmt->Rshift, fmt->Gshift, fmt->Bshift, fmt->Ashift);

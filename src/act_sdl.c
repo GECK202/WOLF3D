@@ -6,21 +6,11 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 15:28:31 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:41:24 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-
-void	close_sdl(t_game *game)
-{
-	SDL_FreeSurface(game->surf);
-	game->surf = 0;
-	SDL_DestroyWindow(game->win);
-	game->win = 0;
-	TTF_Quit();
-	SDL_Quit();
-}
 
 void	sld_events(t_game *game, SDL_Event e, int *quit, int *repaint)
 {

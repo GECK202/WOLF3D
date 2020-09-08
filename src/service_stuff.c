@@ -6,11 +6,23 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 09:23:28 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:42:52 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+
+void	close_sdl(t_game *game)
+{
+	if (game->surf)
+		SDL_FreeSurface(game->surf);
+	game->surf = 0;
+	if (game->win)
+		SDL_DestroyWindow(game->win);
+	game->win = 0;
+	TTF_Quit();
+	SDL_Quit();
+}
 
 void	check_segv(char *file)
 {
@@ -28,6 +40,7 @@ void	check_segv(char *file)
 
 void	ft_exit(char *line)
 {
+	//close_sdl(t_game *game);
 	ft_putstr(line);
 	ft_putchar('\n');
 	exit(-1);

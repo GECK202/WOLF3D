@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 16:01:07 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 19:17:45 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,8 +346,14 @@ void		load_music(t_game *game);
 //draw map
 void		draw_map(t_game *game);
 
-//draw GUI
-void		draw_gui(t_game *game);
+/*
+** draw_gui.c
+*/
+void	draw_gui(t_game *game);
+void	draw_back(t_game *game, int tile_u, int tile_v);
+void	draw_face(t_game *game, int tile_u, int tile_v);
+void	draw_gun(t_game *game, int tile_u, int tile_v);
+
 
 //color
 void 		set_color(SDL_Color *col, int r, int g, int b);

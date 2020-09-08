@@ -3,17 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/04 20:09:39 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/08 12:33:40 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-/*
-void	set_col_num(t_vec2 *isc_pos, t_isec *isec, t_game *game, SDL_Point index)
+
+void	set_col_num(t_drawer *dr, t_isec *isec, t_game *game)//t_vec2 *isc_pos, , SDL_Point index)
+{
+	t_vec2		delta;
+	int		number;
+	int		number2;
+	t_vec2	pos;
+
+	pos.x = dr->barrier_f[0][0];
+	pos.y = dr->barrier_f[0][1];
+	
+	if (pos.y < floor(pos.y) + 0.5)
+	{
+		delta.y = pos.y - floor(pos.y);
+		number = 0;
+	}
+	else
+	{
+		delta.y = floor(pos.y) + 1.0 - pos.y;
+		number = 2;
+	}
+	if (pos.x < floor(pos.x) + 0.5)
+	{
+		delta.x = pos.x - floor(pos.x);
+		number2 = 3;
+	}
+	else
+	{
+		delta.x = floor(pos.x) + 1.0 - pos.x;
+		number2 = 1;
+	}
+	if (delta.x > delta.y)
+	{
+		isec->colum = (int)((pos.x - (int)(pos.x)) * 64);
+		
+		isec->number = game->level.map.elem[dr->barrier_d[1]][dr->barrier_d[0]].side[number];
+		//if (number == 0)
+		//	isec->colum = 63 - isec->colum;
+	}
+	else
+	{
+		isec->colum = (int)((pos.y - (int)(pos.y)) * 64);
+		isec->number = game->level.map.elem[dr->barrier_d[1]][dr->barrier_d[0]].side[number2];
+		//if (number2 == 1)
+		//	isec->colum = 63 - isec->colum;
+	}
+}
+
+void	set_col_num2(t_vec2 *isc_pos, t_isec *isec, t_game *game, SDL_Point index)
 {
 	t_vec2		delta;
 	int		number;
@@ -55,6 +102,7 @@ void	set_col_num(t_vec2 *isc_pos, t_isec *isec, t_game *game, SDL_Point index)
 	}
 }
 
+/*
 void	engine(t_game *game, t_isec *isec, int x)
 {
 	float	ang;
@@ -92,8 +140,10 @@ void	engine(t_game *game, t_isec *isec, int x)
 //*/
 void	def_wallparams(t_player *player, t_drawer *drawer)
 {
-	drawer->ray_alpha = (player->sec.fov * (S_W / 2 - drawer->cursor_x)) / (double)S_W;
-	drawer->wall_len = (S_W / (drawer->raylen[0] * cos(drawer->ray_alpha)));
+	double alpha;
+
+	alpha = (player->sec.fov * (S_W / 2 - drawer->cursor_x)) / (double)S_W;
+	drawer->wall_len = (S_W / (drawer->raylen[0] * cos(alpha)));
 }
 
 
@@ -108,6 +158,7 @@ void	engine(t_game *game, t_isec *isec, int x)
 	player = &(game->player);
 	map = &(game->level.map);
 	drawer->cursor_x = x + H_W;
+	
 	def_raylen(map, player, drawer);
 	def_walltile(map, drawer);
 	def_walltile_u(drawer);
@@ -118,5 +169,8 @@ void	engine(t_game *game, t_isec *isec, int x)
 	isec->dist = drawer->raylen[0];
 	isec->height = drawer->wall_len / 2;
 	isec->number = drawer->wall_tile;
-	isec->colum = drawer->tex_u;	
+	isec->colum = drawer->tex_u;
+
+	set_col_num(drawer, isec, game);
+	
 }

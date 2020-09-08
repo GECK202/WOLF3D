@@ -6,17 +6,17 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/05 20:20:31 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 11:54:57 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_H
 # define WOLF_H
 
-# define S_W 1400
-# define S_H 700
-# define H_W 700
-# define H_H 350
+# define S_W 640
+# define S_H 480
+# define H_W 320
+# define H_H 240
 # define RATIO 1.78f
 # define THREADS 1
 # define PI2 6.283185307179586
@@ -29,6 +29,8 @@
 # define MIN_OFFSET 0.01f
 # define RECURCE_DEPTH 3
 # define REFR_DEPTH 10
+
+# define U 300
 
 # define GAME 1
 
@@ -230,11 +232,8 @@ typedef struct	s_drawer
 	double		texel_y;
 
 	int			tex_u;
-	char		wall_part; //need rename
+	char		wall_part;
 	char		wall_color;
-	double		ray_alpha;
-	int			wall_up;
-	int			wall_down;
 	int			wall_len;
 	
 }				t_drawer;
@@ -259,7 +258,7 @@ typedef struct		s_editor
 	Uint8			entours;		
 	int				put;
 	int				scale;
-	SDL_Point		mouse_pos;
+	SDL_Point		m_pos;
 	int				click_time;
 	int				press_l;
 	int				press_r;
@@ -375,6 +374,7 @@ void		draw_editor_help(t_game *game);
 void		draw_editor_select(t_game *game, t_editor *ed);
 void		draw_editor_modify_wall(t_game *game, t_editor *ed);
 void		draw_editor_side_wall(t_game *game, t_editor *ed, int side);
+void		draw_cursor_info(t_game *game, t_editor *ed);
 
 //draw sprites
 void		draw_sprites(t_game *game);

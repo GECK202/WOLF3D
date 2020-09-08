@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/11 17:59:50 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/08 09:27:47 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void		main_selector(t_game *game)
 
 int			main(int ac, char *av[])
 {
-	t_game		*game;
+	t_game		game;
 	int			cheat;
 	int			status;
+	double		z_buffer[S_W * S_H];
 
 	status = 1;
 	if (ac == 2) {
@@ -39,19 +40,14 @@ int			main(int ac, char *av[])
 		if (!ft_strcmp(av[1], "editor"))
 			status = 2;
 	}
-	if (!(game = (t_game *)ft_memalloc(sizeof(t_game))))
-		ft_exit("Failed to alloc t_game");
-	if (!(game->z_buffer = (double *)ft_memalloc(sizeof(double) * S_W * S_H)))
-		ft_exit("Failed to alloc z_buff ");
-	init_player(game);
-	load_map(&(game->level), &(game->player));
-	if (!init_sdl(game))
-		return (free_init_sdl(game));
-	game->status = status;
-	main_selector(game);
-	close_sdl(game);
-	free(game->z_buffer);
-	free(game);
+	game.z_buffer = &z_buffer;
+	init_player(&game);
+	load_map(&game.level, &game.player);
+	if (!init_sdl(&game))
+		return (free_init_sdl(&game));
+	game.status = status;
+	main_selector(&game);
+	close_sdl(&game);
 	return (0);
 }
 

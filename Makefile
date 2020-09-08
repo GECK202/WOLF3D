@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+         #
+#    By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 17:12:18 by vkaron            #+#    #+#              #
-#    Updated: 2020/09/04 18:12:04 by jthuy            ###   ########.fr        #
+#    Updated: 2020/09/08 12:17:02 by vkaron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,14 @@ FILES =		act_sdl \
 			player \
 			service_stuff \
 			editor \
-			editor_file \
+			editor_file_load \
+			editor_file_save \
 			editor_mouse_events \
 			editor_events \
 			editor_draw_select_color \
 			editor_service \
 			editor_draw_menu \
+			editor_draw_info \
 			editor_init \
 			editor_check_frame \
 			editor_pick_map \

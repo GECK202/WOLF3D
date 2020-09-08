@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/05 20:17:45 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 08:54:54 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	check_y(t_game_obj *obj, t_map *map, t_vec2 *test)
 	int x;
 
 	x = (int)test->x;
-	y1 = (int)(test->y - obj->border);// * map->width + (int)(test->x);
-	y2 = (int)(test->y + obj->border);// * map->width + (int)(test->x);
+	y1 = (int)(test->y - obj->border);
+	y2 = (int)(test->y + obj->border);
 	if (y1 >= 0 && y1 < 64 && x >= 0 && x < 64 && map->elem[y1][x].lock == 1)
 		test->y = (int)(test->y - obj->border) + obj->border + 1.0;
 	else if (y2 >= 0 && y2 < 64 && x >= 0 && x < 64 && map->elem[y2][x].lock == 1)
@@ -76,9 +76,6 @@ void	move_back(t_game_obj *obj, t_map *map, double koeff)
 	check_y(obj, map, &(test));
 	obj->pos.x = test.x;
 	obj->pos.y = test.y;
-
-	//obj->pos.x -= obj->speed * (obj->dir.x);// - obj->pos.x);
-	//obj->pos.y -= obj->speed * (obj->dir.y);// - obj->pos.y);
 }
 
 void	move_left(t_game_obj *obj, t_map *map, double koeff)
@@ -87,7 +84,7 @@ void	move_left(t_game_obj *obj, t_map *map, double koeff)
 	t_vec2	test;
 
 	koeff *= obj->speed;
-	rad = (obj->rot + 90) * M_PI / 180;
+	rad = (obj->rot + M_PI_2);
 	test.x = obj->pos.x + koeff * sin(rad);
 	test.y = obj->pos.y + koeff * cos(rad);
 	check_x(obj, map, &(test));
@@ -102,7 +99,7 @@ void	move_right(t_game_obj *obj, t_map *map, double koeff)
 	t_vec2	test;
 
 	koeff *= obj->speed;
-	rad = (obj->rot - 90) * M_PI / 180;
+	rad = (obj->rot - M_PI_2);
 	test.x = obj->pos.x + koeff * sin(rad);
 	test.y = obj->pos.y + koeff * cos(rad);
 	check_x(obj, map, &(test));
@@ -113,44 +110,31 @@ void	move_right(t_game_obj *obj, t_map *map, double koeff)
 
 void	turn_left(t_game_obj *obj, double koeff)
 {
-	//float rad;
-
 	obj->rot += obj->rot_speed * koeff;
 	while (obj->rot > PI2)
 		obj->rot -= PI2;
-	//rad = obj->rot * M_PI / 180;
 	obj->dir.x = sin(obj->rot);
 	obj->dir.y = cos(obj->rot);
-	//printf("rot=%f\n",obj->rot);
 }
 
 void	turn_right(t_game_obj *obj, double koeff)
 {
-	//float rad;
-
 	obj->rot -= obj->rot_speed * koeff;
 	while (obj->rot < 0)
 		obj->rot += PI2;
-	//rad = obj->rot * M_PI / 180;
 	obj->dir.x = sin(obj->rot);
 	obj->dir.y = cos(obj->rot);
-	//printf("rot=%f\n",obj->rot);
 }
 
 void	init_object(t_game_obj *obj,  t_vec2 pos, double rot, double speed,
 	double rot_speed)
 {
-	//float rad;
-
-	//rad = rot * M_PI / 180;
 	obj->pos.x = pos.x;
 	obj->pos.y = pos.y;
 	obj->rot = rot;
 	obj->dir.x = sin(rot);
 	obj->dir.y = cos(rot);
 	obj->border = 0.49;
-	//printf("init dir rad=%f x=%f, y=%f\n", rad, obj->dir.x, obj->dir.y);
-	
 	obj->rot_speed = rot_speed;
 	obj->speed = speed;
 }

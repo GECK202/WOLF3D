@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/07/20 19:29:09 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 09:23:28 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,20 @@ void	ft_exit(char *line)
 	exit(-1);
 }
 
-void	free_l(t_game *game)
-{
-	free(game);
-}
+//void	free_l(t_game *game)
+//{
+//	free(game);
+//}
 
 int		free_init_sdl(t_game *game)
 {
 	close_sdl(game);
-	free_l(game);
+	//free_l(game);
 	ft_exit("BAD THINGS HAPPENING TO SDL");
 	return (-1);
 }
 
+/*
 int		free_word_line(char **line, char **word)
 {
 	int i;
@@ -72,4 +73,4 @@ int		free_word_line(char **line, char **word)
 	}
 	return (i);
 }
-
+//*/

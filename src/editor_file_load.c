@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 12:32:32 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/08 14:58:47 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ int		read_map(t_editor *ed, char *data, int cell)
 	int			i;
 	int			cmp[16];
 	SDL_Point	p;
+	int			s;
 
 	if (cell == -1)
 		return (read_base_color(&ed->map, data));
 	i = -1;
-	while (++i < 16)
+	while (++i < 17)
 		if ((cmp[i] = hex_to_int(data[i])) == -1)
 			return (0);
 	p.y = cell / 64;
@@ -62,8 +63,9 @@ int		read_map(t_editor *ed, char *data, int cell)
 		ed->map.elem[p.y][p.x].number = (cmp[1] << 8) | (cmp[2] << 4) | cmp[3];
 		ed->map.elem[p.y][p.x].modify = cmp[4];
 		i = 2;
+		s = 0;
 		while ((i += 3) < 15)
-			ed->map.elem[p.y][p.x].side[0] = (cmp[i] << 8) | (cmp[i + 1] << 4) |
+			ed->map.elem[p.y][p.x].side[s++] = (cmp[i] << 8) | (cmp[i + 1] << 4) |
 				cmp[i + 2];
 	}
 	else

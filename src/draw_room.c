@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 16:10:28 by jthuy             #+#    #+#             */
-/*   Updated: 2020/09/09 14:35:49 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 14:43:49 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	def_raylen(t_map *map, t_player *player, t_drawer *drawer)
 {
-	drawer->ray_angle = ((drawer->cursor_x / (double)S_W) * player->sec.fov)
+	drawer->ray_angle = ((drawer->cursor[0] / (double)S_W) * player->sec.fov)
 		+ (player->obj.rot - player->sec.fov / 2.0);
 	drawer->ray_tan[0] = tan(drawer->ray_angle);
 	drawer->ray_tan[1] = tan(drawer->ray_angle - M_PI_2);
@@ -40,7 +40,7 @@ void	def_raylen(t_map *map, t_player *player, t_drawer *drawer)
 	calc_fourthquad(map, player, drawer);
 }
 
-char	check_barrier(t_map *map, t_player *player, t_drawer *drawer)
+char	check_barrier(t_map *map, t_drawer *drawer)
 {	
 	if (drawer->barrier_d[0] < 0 || drawer->barrier_d[0] >= 64 ||
 		drawer->barrier_d[1] < 0 || drawer->barrier_d[1] >= 64)
@@ -71,8 +71,8 @@ double	calc_raylen(t_player *player, t_drawer *drawer, char index)
 {
 	double	ray_len;
 
-	ray_len = sqrt(pow(drawer->barrier_f[index][0] - player->obj.pos.x, 2) +
-		pow(drawer->barrier_f[index][1] - player->obj.pos.y, 2));
+	ray_len = sqrt(pow(drawer->barrier_f[(int)index][0] - player->obj.pos.x, 2) +
+		pow(drawer->barrier_f[(int)index][1] - player->obj.pos.y, 2));
 	return (ray_len);
 }
 

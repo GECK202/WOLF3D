@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/09 14:36:30 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 14:42:50 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ typedef struct		s_cursor
 
 typedef struct	s_drawer
 {
-	int			cursor_x;
+	int			cursor[2];
 	double		ray_angle;
 	double		ray_tan[2];
 	double		raylen[2];
@@ -377,7 +377,7 @@ void		draw_vertline(t_game *game, t_sprt *sprite);
 ** door_sprite.c
 */
 void	def_raylen(t_map *map, t_player *player, t_drawer *drawer);
-char	check_barrier(t_map *map, t_player *player, t_drawer *drawer);
+char	check_barrier(t_map *map, t_drawer *drawer);
 double	calc_raylen(t_player *player, t_drawer *drawer, char index);
 void	def_barrierparam(t_player *player, t_drawer *drawer, char n_quad);
 void	def_walltile(t_map *map, t_drawer *drawer);

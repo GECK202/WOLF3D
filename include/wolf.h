@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/09 13:58:05 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 14:36:30 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,22 +204,7 @@ typedef struct		s_cursor
 typedef struct	s_drawer
 {
 	int			cursor_x;
-	int			cursor_y;
 	double		ray_angle;
-	double		ray_sin;
-	double		ray_cos;
-	
-	double		raylen_tmp;
-	double		ray_len;
-	
-	double		barrier_x_f;
-	double		barrier_y_f;
-	double		barrier_x_f_tmp;
-	double		barrier_y_f_tmp;
-	int			barrier_x_d;
-	int			barrier_y_d;
-	
-	// for export to project
 	double		ray_tan[2];
 	double		raylen[2];
 	double		barrier_f[2][2];
@@ -227,15 +212,9 @@ typedef struct	s_drawer
 	double		texel[2];
 	int			mapid;
 	int			wall_tile;
-
-	double		texel_x;
-	double		texel_y;
-
 	int			tex_u;
 	char		wall_part;
-	char		wall_color;
 	int			wall_len;
-	
 }				t_drawer;
 
 typedef struct		s_editor

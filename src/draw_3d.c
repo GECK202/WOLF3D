@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 16:52:46 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 11:10:28 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		*draw_block_3d(void *g)
 	t = (t_thread*)g;
 	x = -H_W + t->thread * S_W / THREADS - 1;
 	max_x = -H_W + (t->thread + 1) * S_W / THREADS;
-	while (++x < max_x)
+	while (++x <= max_x)
 	{
 		engine(t->game, &isec, x);
 		set_col_by_num(&(isec.col), isec.number);

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 19:17:45 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 11:49:39 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_H
 # define WOLF_H
 
-# define S_W 640
-# define S_H 480
-# define H_W 320
-# define H_H 240
+# define S_W 2000
+# define S_H 1000
+# define H_W 1000
+# define H_H 500
 # define RATIO 1.78f
 # define THREADS 1
 # define PI2 6.283185307179586
@@ -161,7 +161,7 @@ typedef struct		s_map
 
 typedef struct		s_level
 {
-	int				number;
+	int				num;
 	t_map			map;
 }					t_level;
 
@@ -282,6 +282,9 @@ typedef struct		s_game
 	int				fps;
 	unsigned int	f_time;
 	unsigned int	last_time;
+	int				comeback;
+	Uint32			delay;
+	int				max_level;
 	int				cheat;
 	int				dummy;
 //	int				thread;
@@ -375,7 +378,7 @@ Uint32		get_img_color(t_game *game, int x, int y, int number);
 void		draw_box(t_game *game, int index, int number, t_editor *ed);
 void		init_editor(t_editor *ed);
 void		draw_frame(t_game *game, const char *message);
-void		draw_menu(t_game *game, t_editor *ed);
+void		draw_editor_menu(t_game *game, t_editor *ed);
 int			check_frame(SDL_MouseButtonEvent *e, t_game *game, t_editor *ed);
 void		select_cursor_sprite(t_editor *ed);
 void		editor_set_cell(t_editor *ed);

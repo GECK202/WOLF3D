@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 16:02:55 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/09 09:37:50 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,35 @@ void		reformat(int *data_img, SDL_Surface *image, SDL_PixelFormat *fmt)
 	}
 }
 
+void	scale_menu(t_game *game)
+{
+	SDL_Rect	screen;
+	SDL_Rect	image;
+	SDL_Surface	*s;
+
+	screen.x = 0;
+	screen.y = 0;
+	screen.w = game->surf->w;
+	screen.h = game->surf->h;
+
+	s = IMG_Load("res/main_screen.png");
+	image.x = 0;
+	image.y = 0;
+	image.w = s->w;
+	image.h = s->h;
+
+	//reformat((int *)s->pixels, s, s->format);
+	game->menu = SDL_CreateRGBSurface(s->flags, screen.w, screen.h, s->format->BitsPerPixel,
+        s->format->Rmask, s->format->Gmask, s->format->Bmask, s->format->Amask);
+	
+	//screen.w = image.w < screen.w ? image.w : screen.w;
+	//screen.h = image.h < screen.h ? image.h : screen.h;
+
+	//surf = *(game->surf);
+	SDL_BlitScaled(s, &image, game->menu, &screen);
+	SDL_FreeSurface(s);
+}
+
 int		init_sdl(t_game *game)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) //|SDL_INIT_AUDIO
@@ -55,14 +84,15 @@ int		init_sdl(t_game *game)
 	game->f_time = 1000 / game->fps;
 	game->last_time = SDL_GetTicks();
 	game->athlas = IMG_Load("res/athlas2.png");
-	game->menu = IMG_Load("res/main_screen.png");
+	
 	//printf("alias");
-	if (!game->athlas || !game->menu)
+	if (!game->athlas)
 		return (ERROR);
 	game->data_img = (int *)game->athlas->pixels;
+	scale_menu(game);
 	game->data_menu = (int *)game->menu->pixels;
 	reformat(game->data_img, game->athlas, game->athlas->format);
-	reformat(game->data_menu, game->menu, game->menu->format);
+	//reformat(game->data_menu, game->menu, game->menu->format);
 	
 
 //printf("Pixel Color -> R: %d,  G: %d,  B: %d,  A: %d\n", fmt->Rshift, fmt->Gshift, fmt->Bshift, fmt->Ashift);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_gui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 19:20:23 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 11:10:24 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	draw_back(t_game *game, int tile_u, int tile_v)
 		}
 	}
 }
+
+
 
 void	draw_face(t_game *game, int tile_u, int tile_v)
 {

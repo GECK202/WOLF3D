@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/08/13 20:20:38 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/09 11:56:55 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,19 +130,17 @@ static int		read_map(t_map *map, char *data, int cell, t_player *pl)
 //*
 void	load_map(t_level *level, t_player *pl)
 {
-	int			number;
 	char 		file[11];
 	int			fd;
 	char		buf[18];
 	int			n;
 	int 		cell;
 
-	number = 1;
 	ft_strcpy(file, "maps/map00");
-	file[8] = number / 10 + '0';
-	file[9] = number % 10 + '0';
-	check_segv(file);
-
+	file[8] = level->num / 10 + '0';
+	file[9] = level->num % 10 + '0';
+	printf("open file=%s\n",file);
+	check_segv(file);	
 	if ((fd = open(file, 0x0000)) < 0)
 		ft_exit("Hey man! It is are not a map!!!");
 	cell = -2;

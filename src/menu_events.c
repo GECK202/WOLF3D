@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 16:19:28 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/09 08:30:06 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	sld_events_menu(t_game *game, SDL_Event e, SDL_Point *flags)
 {
 	if (e.type == SDL_QUIT)
+	{
+		game->status = 0;
 		flags->x = 1;
+	}
 	else if (e.type == SDL_KEYDOWN)
 	{
 		if (e.key.keysym.sym == SDLK_ESCAPE)

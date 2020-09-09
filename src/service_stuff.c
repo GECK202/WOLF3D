@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 15:42:52 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/09 12:20:58 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 void	close_sdl(t_game *game)
 {
+	//write(1,"OK\n", 3);
 	if (game->surf)
 		SDL_FreeSurface(game->surf);
+	
 	game->surf = 0;
+	//if (game->athlas)
+	//	SDL_FreeSurface(game->athlas);
+	//write(1,"OK2\n", 4);
+	game->athlas = 0;
+	if (game->menu)
+		SDL_FreeSurface(game->menu);
+	game->menu = 0;
 	if (game->win)
 		SDL_DestroyWindow(game->win);
 	game->win = 0;
 	TTF_Quit();
 	SDL_Quit();
+	
 }
 
 void	check_segv(char *file)

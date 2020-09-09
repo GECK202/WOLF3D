@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 11:36:15 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/09 10:26:45 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_text_menu(t_game *game, t_editor *ed)
 	ed->scale = scale;
 }
 
-void	draw_menu(t_game *game, t_editor *ed)
+void	draw_editor_menu(t_game *game, t_editor *ed)
 {
 	SDL_Rect rect;
 

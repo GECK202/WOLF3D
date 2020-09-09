@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/09 14:42:50 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 15:07:06 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define U 300
 
 # define GAME 1
+
+# define GUN_SCALE 200
 
 # include <pthread.h>
 # include <math.h>
@@ -215,6 +217,8 @@ typedef struct	s_drawer
 	int			tex_u;
 	char		wall_part;
 	int			wall_len;
+	int			tex_d[2];
+	int			pix_img;
 }				t_drawer;
 
 typedef struct		s_editor

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/08 15:12:25 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/09 12:55:59 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	map_editor(t_game *game)
 			SDL_FillRect(game->surf, NULL, ed.map.roof);
 			draw_map_editor(game, &ed);
 			draw_col_frame(game, &ed, ed.cursor.pos, 0xFFFF0000);
-			draw_menu(game, &ed);
+			draw_editor_menu(game, &ed);
 			status_selector(game, &ed);
 			SDL_UpdateWindowSurface(game->win);
 			flags.y = 0;

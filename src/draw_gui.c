@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/09 15:31:53 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/09 15:41:13 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_gui(t_game *game)
 {
 	static int	counter = 0;
 	static char	shift = 0;
-		
+
 	draw_gun(game, 0, 33);
 	draw_back(game, 0, 1);
 	draw_face(game, 3 + shift, 42);

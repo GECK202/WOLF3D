@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/09 15:07:06 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/10 13:45:16 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,5 +398,8 @@ void	calc_fourthquad(t_map *map, t_player *player, t_drawer *drawer);
 //main menu
 void	main_menu(t_game *game);
 void	sld_events_menu(t_game *game, SDL_Event e, SDL_Point *flags);
+
+// void	def_icon(SDL_Window	*window, int *img, int shift_x, int shift_y);
+void	def_icon(t_game *game, int shift_x, int shift_y);
 
 #endif

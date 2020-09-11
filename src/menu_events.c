@@ -23,7 +23,7 @@ void	mouse_move_menu(SDL_MouseMotionEvent *e, t_game *game)
 		game->menu_flag = 1;
 		game->menu_item = ((e->y - H_W + H_W / 2) * 5 / H_H) - 1; 
 	}
-	if ((game->comeback == 0 && game->menu_item == 0) || game->menu_item > 4)
+	if ((game->comeback == 0 && game->menu_item == 0) || game->menu_item > 4 || game->menu_item < 0)
 		game->menu_flag = 0;
 }
 

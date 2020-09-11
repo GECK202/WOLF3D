@@ -13,10 +13,10 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-# define S_W 1920
-# define S_H 1080
-# define H_W 960
-# define H_H 540
+# define S_W 960
+# define S_H 720
+# define H_W 480
+# define H_H 360
 # define THREADS 16
 # define PI2 6.283185307179586
 
@@ -254,6 +254,7 @@ typedef struct		s_editor
 	Uint32			sel_col;
 	int				status;
 	int				cur_elem;
+	int				level;
 }					t_editor;
 
 typedef struct		s_game

@@ -34,7 +34,7 @@ static void		draw_im(t_game *game, int *im_data)
 static void		check_door_block(t_game *game)
 {
 	SDL_Point	p;
-	int			i;
+//	int			i;
 
 	p.x = (int)(game->player.obj.pos.x + game->player.obj.dir.x);
 	p.y = (int)(game->player.obj.pos.y + game->player.obj.dir.y);
@@ -85,7 +85,7 @@ static void		check_map_block(t_game *game, int *quit)
 		game->delay = 11;
 		game->comeback = 0;
 		++game->level.num;
-		if (game->level.num > game->max_level)
+		if (game->level.num > MAX_LEVEL)
 		{
 			*quit = 1;
 			game->status = 4;

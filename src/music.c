@@ -12,10 +12,36 @@
 
 #include "wolf.h"
 
+void	check_play_music(t_game *game)
+{
+	if (!game->music.music)
+		return ;
+	if (game->music.play == 0)
+	{
+		 game->music.play = 1;
+		 Mix_ResumeMusic();
+	}
+	else
+	{
+		game->music.play = 0;
+		Mix_PauseMusic();
+	}
+	//Mix_FreeMusic(music);
+	//Mix_CloseAudio();
+}
+
+void	close_music(t_game *game)
+{
+	if (game->music.music)
+		Mix_FreeMusic(game->music.music);
+	Mix_CloseAudio();
+}
+
 void	load_music(t_game *game)
 {
 	//*
-	Mix_Music *music = NULL;
+	game->music.play = 0;
+	game->music.music = NULL;
 
 	//	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0)
 	//	return -1;
@@ -30,25 +56,29 @@ void	load_music(t_game *game)
 		//return -1;
 	
 	// Load our music
-	music = Mix_LoadMUS("res/music.mp3");
-	if (music == NULL)
+	game->music.music = Mix_LoadMUS("res/music.mp3");
+	if (game->music.music == NULL)
 		return ;// -1;
 	
 	//if ( Mix_PlayChannel(-1, wave, 0) == -1 )
 		//return -1;
 	
-	if ( Mix_PlayMusic( music, -1) == -1 )
-		return;// -1;
-		
+	if (Mix_PlayMusic(game->music.music, -1) == -1)
+	{
+		Mix_FreeMusic(game->music.music);
+		game->music.music = NULL;
+		return ;
+	}
+	game->music.play = 1;
 	//while ( 
-	Mix_PlayingMusic();// ) ;
+	//Mix_PlayingMusic();// ) ;
 	
 	// clean up our resources
 	//Mix_FreeChunk(wave);
 	//Mix_FreeMusic(music);
 	
 	// quit SDL_mixer
-	//Mix_CloseAudio();
+	//
 	
 	//return 0;
 	//*/

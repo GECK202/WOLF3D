@@ -94,7 +94,7 @@ void	draw_gui(t_game *game)
 	static int	counter = 0;
 	static char	shift = 0;
 	t_drawer	dr;
-	SDL_Rect	pos;
+//	SDL_Rect	pos;
 
 	draw_gun(game, &dr, 0, 33);
 	draw_back(game, &dr, 0, 1);

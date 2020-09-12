@@ -36,7 +36,7 @@ void	close_sdl(t_game *game)
 	
 }
 
-void	check_segv(char *file)
+int		check_segv(char *file)
 {
 	int		fd;
 	int		ret;
@@ -44,10 +44,17 @@ void	check_segv(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (!fd)
-		ft_exit("U TRYINA SEGV ME?");
+	{
+		//ft_putstr("U TRYINA SEGV ME?\n");
+		return (1);
+	}
 	ret = read(fd, buff, 5);
 	if (!ret || ret < 0)
-		ft_exit("U GIVING BAD FILES ARENT YA");
+	{
+		//ft_putstr("U GIVING BAD FILES ARENT YA?\n");
+		return (1);
+	}
+	return (0);
 }
 
 void	ft_exit(char *line)

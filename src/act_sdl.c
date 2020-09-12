@@ -12,16 +12,21 @@
 
 #include "wolf.h"
 
-void	check_start(t_game *game)
+int		check_start(t_game *game)
 {
 	if (game->comeback == 0)
 	{
-		if (game->level.num > game->max_level || game->level.num <= 0)
+		if (game->level.num > MAX_LEVEL || game->level.num <= 0)
 			game->level.num = 1;
-		printf("level = %d\n", game->level.num);
-		load_map(&game->level, &game->player);
+		//printf("level = %d\n", game->level.num);
+		if (!load_map(&game->level, &game->player))
+		{
+			ft_putstr("Not valid map!\n");
+			return (0);
+		}
 		game->delay = 10;
 	}
+	return (1);
 }
 
 void	sld_events2(t_game *game, SDL_Event e, int *repaint)
@@ -84,11 +89,15 @@ void	sdl_cycle(t_game *game)
 {
 	SDL_Event	e;
 	SDL_Point	flags;
-	int			first;
+//	int			first;
 
 	flags.x = 0;
-	first = 1;
-	check_start(game);
+//	first = 1;
+	if (!check_start(game))
+	{
+		game->status = 0;
+		return ;
+	}
 	//game->f_time = 100;
 	while (!flags.x)
 	{
@@ -103,7 +112,11 @@ void	sdl_cycle(t_game *game)
 		{
 			SDL_Delay(game->delay);
 			game->delay = 10;
-			check_start(game);
+			if (!check_start(game))
+			{
+				game->status = 0;
+				return ;
+			}
 		}
 	}
 	if (game->status != 0 && game->status != 4)

@@ -72,6 +72,30 @@ void			add_bar(t_map * map, SDL_Point pos, int num)
 	map->elem[pos.y][pos.x].lock = 1;
 }
 
+void			add_ant(t_map * map, SDL_Point pos, int num)
+{
+	t_vec2 p;
+	
+	if (map->ants > 63)
+		return ;
+	p.x = pos.x + 0.5;
+	p.y = pos.y + 0.5;
+	map->ant[map->ants].sprt.pos = p;
+	map->ant[(map->ants)++].sprt.numb = num;
+}
+
+void			add_ach(t_map * map, SDL_Point pos, int num)
+{
+	t_vec2 p;
+	
+	if (map->achs > 63)
+		return ;
+	p.x = pos.x + 0.5;
+	p.y = pos.y + 0.5;
+	map->ach[map->achs].sprt.pos = p;
+	map->ach[(map->achs)++].sprt.numb = num;
+}
+
 //static void		check_map
 
 static int		read_map(t_map *map, char *data, int cell, t_player *pl)
@@ -127,11 +151,39 @@ static int		read_map(t_map *map, char *data, int cell, t_player *pl)
 			add_enm(map, p,  (cmp[1] << 8) | (cmp[2] << 4) | cmp[3]);
 		else if (t == BARIER)
 			add_bar(map, p,  (cmp[1] << 8) | (cmp[2] << 4) | cmp[3]);
+		else if (t == ENTOURAGE)
+			add_ant(map, p,  (cmp[1] << 8) | (cmp[2] << 4) | cmp[3]);
+		else if (t == ACHIV)
+			add_ach(map, p,  (cmp[1] << 8) | (cmp[2] << 4) | cmp[3]);
 	}		
 	return (1);
 }
-//*
-void	load_map(t_level *level, t_player *pl)
+
+void	set_border(t_map *map)
+{
+	SDL_Point	p;
+	int			s;
+
+	p.y = -1;
+	while (++p.y < 64)
+	{
+		p.x = -1;
+		while (++p.x < 64)
+		{
+			if ((p.x == 0 || p.y == 0 || p.x == 63 || p.y == 63) && map->elem[p.y][p.x].number == -1)
+			{
+				map->elem[p.y][p.x].number = 0;
+				map->elem[p.y][p.x].lock = 1;
+				s = -1;
+				while (++s < 4)
+					map->elem[p.y][p.x].side[s] = 0;
+				
+			}
+		}
+	}
+}
+
+int		load_map(t_level *level, t_player *pl)
 {
 	char 		file[11];
 	int			fd;
@@ -143,12 +195,13 @@ void	load_map(t_level *level, t_player *pl)
 	file[8] = level->num / 10 + '0';
 	file[9] = level->num % 10 + '0';
 	//printf("open file=%s\n",file);
-	check_segv(file);	
-	if ((fd = open(file, 0x0000)) < 0)
-		ft_exit("Hey man! It is are not a map!!!");
+	if (check_segv(file) || ((fd = open(file, 0x0000)) < 0)) 	
+		return (0);
 	cell = -2;
 	level->map.enms = 0;
 	level->map.bars = 0;
+	level->map.achs = 0;
+	level->map.ants = 0;
 	while ((n = read(fd, buf, 18)))
 	{
 		++cell;
@@ -156,12 +209,14 @@ void	load_map(t_level *level, t_player *pl)
 		{
 			close(fd);
 			//printf("in %d\n",cell);
-			ft_exit("not valid map!");
+			return (0);
 		}
 	}
 	close(fd);
 	//printf("out %d\n",cell);
 	if (cell < 4095)
-		ft_exit("not valid map!");
+		return (0);
+	set_border(&level->map);
+	return (1);
 }
 

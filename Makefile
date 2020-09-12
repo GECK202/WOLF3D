@@ -68,6 +68,7 @@ LIBS = 		-Llibft -lft \
 			-lm \
 			-lpthread
 
+
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	H_FIND =-I libft \
@@ -99,18 +100,22 @@ endif
 all: libr $(PROGRAM_NAME)
 
 libr:
-	make -C libft/ all
+	@make -C libft/ all
+	@echo -ne '*'
 
 $(PROGRAM_NAME): $(O_FILES)
-	gcc $(FLAGS) -o $@ $^ $(LIBS) $(FRAME)
+	@gcc $(FLAGS) -o $@ $^ $(LIBS) $(FRAME)
+	$(info  )
+	$(info *** WOLF3D COMPLETE ***)
 
 $(O_DIR)/%.o: $(S_DIR)/%.c $(H_FILE)
 	@mkdir -p $(O_DIR)
-	gcc $(FLAGS) -c $< -o $@ $(H_FIND)
+	@gcc $(FLAGS) -c $< -o $@ $(H_FIND)
+	@echo -ne '*'
 
 clean:
 	make -C libft/ clean
-	rm -f $(O_FILES)
+	rm -rf $(O_DIR)
 
 fclean : clean
 	make -C libft/ fclean

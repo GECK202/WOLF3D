@@ -30,10 +30,13 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(O_FILES)
-	ar rc $(NAME) $(O_FILES)
+	@ar rc $(NAME) $(O_FILES)
+	$(info  )
+	$(info *** LIBFT COMPLETE ***)
 
 %.o: %.c libft.h
-	gcc	$(FLAGS)  -c $< $(H_DIR)
+	@gcc	$(FLAGS)  -c $< $(H_DIR)
+	@echo -ne '*'
 
 clean:
 	rm -f $(O_FILES)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/14 14:03:46 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 15:13:34 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,10 +213,11 @@ int		load_map(t_level *level, t_player *pl)
 		}
 	}
 	close(fd);
-	printf("out %d\n",cell);
+	
 	if (cell < 4095)
 		return (ERROR);
 	set_border(&level->map);
+	printf("out %d\n",cell);
 	return (OK);
 }
 

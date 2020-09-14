@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_gui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/14 13:53:11 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 16:20:52 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,21 @@ void	draw_face(t_game *game, t_drawer *dr, int tile_u, int tile_v)
 
 void	draw_back(t_game *game, t_drawer *dr, int tile_u, int tile_v)
 {
+	SDL_Point	p;
+	SDL_Point	m;
+
 	dr->cursor[0] = -1;
+	m.x = S_H * S_W;
+	m.y = game->athlas->w * game->athlas->h;
 	while (++dr->cursor[0] < S_W)
 	{
 		dr->cursor[1] = -1;
 		while (++dr->cursor[1] < 65)
 		{
-			game->data[dr->cursor[0] +
-				S_W * (dr->cursor[1] + S_H - 64)] =
-				game->data_img[dr->cursor[0] % 64 + 65 * tile_u +
-				1039 * (dr->cursor[1] + 64 * tile_v)];
+			p.x = dr->cursor[0] + S_W * (dr->cursor[1] + S_H - 64);
+			p.y = dr->cursor[0] % 64 + 65 * tile_u + 1039 * (dr->cursor[1] + 64 * tile_v);
+			if (p.x >= 0 && p.x < m.x && p.y >=0 && p.y < m.y)
+				game->data[p.x] = game->data_img[p.y];
 		}
 	}
 }
@@ -113,8 +118,11 @@ void	draw_gui(t_game *game)
 	t_drawer		dr;
 	SDL_Rect		pos;
 
+	
 	draw_gun(game, &dr, 0, 33);
+	
 	draw_back(game, &dr, 0, 1);
+	printf("OK\n");
 	if (((SDL_GetTicks() / 1000) % 4))
 		draw_face(game, &dr, 4, 42);
 	else

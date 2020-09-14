@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/14 13:57:20 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 16:13:45 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,11 +296,11 @@ typedef struct		s_game
 	t_music			music;
 }					t_game;
 
-typedef struct		s_thread
+typedef struct		s_flow
 {
 	t_game			*game;
-	int				thread;
-}					t_thread;
+	int				flow;
+}					t_flow;
 
 //events
 int			key_press(SDL_Keycode key, t_game *game);

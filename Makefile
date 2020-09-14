@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+         #
+#    By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 17:12:18 by vkaron            #+#    #+#              #
-#    Updated: 2020/09/14 13:30:25 by jthuy            ###   ########.fr        #
+#    Updated: 2020/09/14 15:00:34 by vkaron           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 PROGRAM_NAME = wolf3d
 
-FLAGS =	-Wall -Wextra -Werror# -Ofast -g
+FLAGS =	-Wall -Wextra -Werror -g
 #FLAGS =		-g
 
 FILES =		act_sdl \
@@ -79,6 +79,8 @@ ifeq ($(UNAME_S),Linux)
 			-lSDL2_mixer \
 			-lSDL2_image \
 			-lSDL2_ttf
+			
+	ECHO_FLAG = -ne
 endif
 ifeq ($(UNAME_S),Darwin)
 	H_FIND =-I libft \
@@ -95,23 +97,24 @@ ifeq ($(UNAME_S),Darwin)
 			-framework SDL2_ttf \
 			-framework SDL2_mixer \
 			-rpath Frameworks/
+			
+	ECHO_FLAG = -n
 endif	
 
 all: libr $(PROGRAM_NAME)
 
 libr:
 	@make -C libft/ all
-	@echo -n '*'
 
 $(PROGRAM_NAME): $(O_FILES)
 	@gcc $(FLAGS) -o $@ $^ $(LIBS) $(FRAME)
 	$(info  )
-	$(info *** WOLF3D COMPLETE ***)
+	$(info # MAKE COMPLETE #)
 
 $(O_DIR)/%.o: $(S_DIR)/%.c $(H_FILE)
 	@mkdir -p $(O_DIR)
 	@gcc $(FLAGS) -c $< -o $@ $(H_FIND)
-	@echo -n '*'
+	@echo $(ECHO_FLAG) '='
 
 clean:
 	make -C libft/ clean

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   act_sdl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/10 19:07:28 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 16:03:17 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	redraw(t_game *game)
 		draw_game(game);
 		SDL_UpdateWindowSurface(game->win);
 		SDL_FlushEvent(SDL_KEYDOWN);
+		
 	//	game->last_time = SDL_GetTicks();
 	//}
 }
@@ -89,34 +90,47 @@ void	sdl_cycle(t_game *game)
 {
 	SDL_Event	e;
 	SDL_Point	flags;
+	Uint32		cur;
+	Uint32		last;
 //	int			first;
 
 	flags.x = 0;
 //	first = 1;
+	
 	if (!check_start(game))
 	{
 		game->status = 0;
 		return ;
 	}
+	//SDL_Delay(2000);
 	//game->f_time = 100;
+	last = SDL_GetTicks();
 	while (!flags.x)
 	{
 		flags.y = 0;
-		check_keyboard(game, 0.3, &(flags.x));
-		redraw(game);
-		if (SDL_PollEvent(&e) != 0 || flags.y)
-			sld_events(game, e, &(flags.x), &(flags.y));
-		if (flags.x)
-			break ;
-		if (game->delay != 10)
+		cur = SDL_GetTicks();
+		
+		if (cur - last > 30)
 		{
-			SDL_Delay(game->delay);
-			game->delay = 10;
-			if (!check_start(game))
+			
+			check_keyboard(game, 0.3, &(flags.x));
+			redraw(game);
+			if (SDL_PollEvent(&e) != 0 || flags.y)
+				sld_events(game, e, &(flags.x), &(flags.y));
+			if (flags.x)
+				break ;
+			if (game->delay != 10)
 			{
-				game->status = 0;
-				return ;
+				SDL_Delay(game->delay);
+				game->delay = 10;
+				if (!check_start(game))
+				{
+					game->status = 0;
+					return ;
+				}
 			}
+			
+			last = cur;
 		}
 	}
 	if (game->status != 0 && game->status != 4)

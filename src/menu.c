@@ -6,7 +6,7 @@
 /*   By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/10 16:39:08 by vkaron           ###   ########.fr       */
+/*   Updated: 2020/09/14 14:53:17 by vkaron           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	main_menu(t_game *game)
 	//r.w = 100;
 	//r.x = 0;
 	//r.y = 0;
+	
 	while (!flags.x)
 	{
 		if (SDL_PollEvent(&e) != 0)
@@ -113,7 +114,7 @@ void	main_menu(t_game *game)
 			SDL_UpdateWindowSurface(game->win);
 			flags.y = 0;
 		}
-		SDL_Delay(5);
+		SDL_Delay(10);
 	}
 	if (flags.x == 1)
 		game->status = 0;

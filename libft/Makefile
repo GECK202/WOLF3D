@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vkaron <vkaron@student.42.fr>              +#+  +:+       +#+         #
+#    By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 17:12:18 by vkaron            #+#    #+#              #
-#    Updated: 2020/01/11 22:13:43 by vkaron           ###   ########.fr        #
+#    Updated: 2020/09/14 13:30:47 by jthuy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(O_FILES)
 
 %.o: %.c libft.h
 	@gcc	$(FLAGS)  -c $< $(H_DIR)
-	@echo -ne '*'
+	@echo -n '*'
 
 clean:
 	rm -f $(O_FILES)

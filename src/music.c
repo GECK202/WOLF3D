@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/07/27 15:49:38 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 13:55:22 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	close_music(t_game *game)
 
 void	load_music(t_game *game)
 {
-	//*
 	game->music.play = 0;
 	game->music.music = NULL;
 
@@ -68,6 +67,10 @@ void	load_music(t_game *game)
 		Mix_FreeMusic(game->music.music);
 		game->music.music = NULL;
 		return ;
+	}
+	while (!Mix_PlayingMusic())
+	{
+		SDL_Delay(1000);
 	}
 	game->music.play = 1;
 	//while ( 

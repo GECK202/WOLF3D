@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vkaron <vkaron@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/23 17:12:18 by vkaron            #+#    #+#              #
-#    Updated: 2020/09/10 10:44:21 by vkaron           ###   ########.fr        #
+#    Updated: 2020/09/14 13:30:25 by jthuy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ all: libr $(PROGRAM_NAME)
 
 libr:
 	@make -C libft/ all
-	@echo -ne '*'
+	@echo -n '*'
 
 $(PROGRAM_NAME): $(O_FILES)
 	@gcc $(FLAGS) -o $@ $^ $(LIBS) $(FRAME)
@@ -111,7 +111,7 @@ $(PROGRAM_NAME): $(O_FILES)
 $(O_DIR)/%.o: $(S_DIR)/%.c $(H_FILE)
 	@mkdir -p $(O_DIR)
 	@gcc $(FLAGS) -c $< -o $@ $(H_FIND)
-	@echo -ne '*'
+	@echo -n '*'
 
 clean:
 	make -C libft/ clean

@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/10 19:18:29 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 14:03:46 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,9 @@ int		load_map(t_level *level, t_player *pl)
 	ft_strcpy(file, "maps/map00");
 	file[8] = level->num / 10 + '0';
 	file[9] = level->num % 10 + '0';
-	//printf("open file=%s\n",file);
+	printf("open file=%s\n",file);
 	if (check_segv(file) || ((fd = open(file, 0x0000)) < 0)) 	
-		return (0);
+		return (ERROR);
 	cell = -2;
 	level->map.enms = 0;
 	level->map.bars = 0;
@@ -208,15 +208,15 @@ int		load_map(t_level *level, t_player *pl)
 		if (cell == 4096 || n != 18 || buf[17] != '\n' || !read_map(&(level->map), buf, cell, pl))
 		{
 			close(fd);
-			//printf("in %d\n",cell);
-			return (0);
+			printf("in %d\n",cell);
+			return (ERROR);
 		}
 	}
 	close(fd);
-	//printf("out %d\n",cell);
+	printf("out %d\n",cell);
 	if (cell < 4095)
-		return (0);
+		return (ERROR);
 	set_border(&level->map);
-	return (1);
+	return (OK);
 }
 

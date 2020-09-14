@@ -6,7 +6,7 @@
 /*   By: jthuy <jthuy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:24:16 by vkaron            #+#    #+#             */
-/*   Updated: 2020/09/11 12:47:47 by jthuy            ###   ########.fr       */
+/*   Updated: 2020/09/14 13:57:20 by jthuy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define GAME 1
 # define GUN_SCALE 200
 
-# define MAX_LEVEL 4
+# define MAX_LEVEL 3
 
 # include <pthread.h>
 # include <math.h>
@@ -364,7 +364,8 @@ void		draw_back(t_game *game, t_drawer *dr, int tile_u, int tile_v);
 void		draw_face(t_game *game, t_drawer *dr, int tile_u, int tile_v);
 void		draw_gun(t_game *game, t_drawer *dr, int tile_u, int tile_v);
 
-void		draw_uitext(t_game *game);
+// void		draw_uitext(t_game *game);
+void	draw_uitext(t_game *game, SDL_Rect* pos);
 
 
 //color

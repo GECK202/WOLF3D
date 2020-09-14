@@ -14,7 +14,7 @@
 
 PROGRAM_NAME = wolf3d
 
-FLAGS =	-Wall -Wextra #-Werror -Ofast -g
+FLAGS =	-Wall -Wextra -Werror# -Ofast -g
 #FLAGS =		-g
 
 FILES =		act_sdl \

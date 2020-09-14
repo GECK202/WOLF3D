@@ -84,9 +84,9 @@ void	draw_menu(t_game *game)
 		r.y += H_H / 5;
 	print_wolf(game->surf, "New game", &r, f_size);
 	if (game->music.play)
-		print_wolf(game->surf, "Music on", &r, f_size);
+		print_wolf(game->surf, "Music pause", &r, f_size);
 	else
-		print_wolf(game->surf, "Music off", &r, f_size);
+		print_wolf(game->surf, "Music resume", &r, f_size);
 	print_wolf(game->surf, "Editor", &r, f_size);
 	print_wolf(game->surf, "Exit", &r, f_size);
 }

@@ -313,6 +313,7 @@ void		mouse_press(SDL_MouseButtonEvent *e, t_game *game);
 int			init_sdl(t_game *game);
 int			check_segv(char *file);
 int			free_word_line(char **line, char **word);
+int			check_res(void);
 
 //exit
 void		ft_exit(char *line);

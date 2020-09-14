@@ -78,6 +78,25 @@ int		free_init_sdl(t_game *game)
 	return (-1);
 }
 
+int		check_res(void)
+{
+	static char	*res[7] = {"res/athlas2.png", "res/main_screen.png", "res/music.mp3", "res/next_level.png", "res/win.png", "prgres/courier.ttf", "prgres/wf.otf"};
+	int			i;
+
+	i = -1;
+	while (++i < 7)
+	{
+		if (check_segv(res[i]))
+		{
+			ft_putstr("Resource \"");
+			ft_putstr(res[i]);
+			ft_putstr("\" are not available!\n");
+			return (ERROR);
+		}
+	}
+	return (OK);
+}
+
 /*
 int		free_word_line(char **line, char **word)
 {

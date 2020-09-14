@@ -83,6 +83,8 @@ int			main(int ac, char *av[])
 
 	if (S_W < 640 || S_H < 480)
 		ft_exit("Bad resolution! Use from 640x480 to 1200x800!");
+	if (!check_res())
+		exit(0);
 	if (!(game = (t_game*)ft_memalloc(sizeof(t_game))))
 		ft_exit("Memory was not allocated!");
 	init_player(game);
